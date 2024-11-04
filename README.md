@@ -4,7 +4,7 @@
 
 ## Features
 
-By creating a PHP class extending `Bastihilger\Entriloquent` you can use this class like a model and have a convenient place for methods 
+By creating a PHP class extending `Bastihilger\Entriloquent` you can use this class like a model and have a convenient place for methods concerning this entries of this collection.
 
 ## How to Install
 
@@ -16,4 +16,42 @@ composer require bastihilger/entriloquent
 
 ## How to Use
 
-Here's where you can explain how to use this wonderful addon.
+Let's assume you have a Statamic collection called "Products" (having the handle `products`). Now you can create a PHP class anywhere, f.e. in your models directory:
+
+```php
+<?php
+
+namespace App\Models;
+
+class Product extends Entriloquent
+{
+    //
+}
+
+```
+
+And use it anywhere in your PHP code like this:
+
+```php
+<?php
+
+//returns product entry - will ONLY search in products collection:
+
+$product = Product::find($id);
+
+// also returns product entry, also only searching in products collection:
+
+$product = Product::where('slug', 'awesome-product-1')->first();
+
+```
+
+Let's also assume your `products` collection has a field called `price`. You can do something like this:
+
+```php
+<?php
+
+//returns collection of product entries:
+
+$product = Product::where('price', '>', 100)->get();
+
+```
