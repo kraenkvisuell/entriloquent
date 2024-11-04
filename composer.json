@@ -1,5 +1,10 @@
 {
     "name": "kraenkvisuell/entriloquent",
+    "keywords": [
+        "laravel",
+        "statamic"
+    ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Kraenkvisuell\\Entriloquent\\": "src"
