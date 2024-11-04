@@ -10,11 +10,9 @@
             "Bastihilger\\Entriloquent\\Tests\\": "tests"
         }
     },
-    "require": {
-        "statamic/cms": "^5.0"
-    },
     "require-dev": {
-        "orchestra/testbench": "^9.0"
+        "orchestra/testbench": "^9.0",
+        "statamic/cms": "^5.0"
     },
     "config": {
         "allow-plugins": {
