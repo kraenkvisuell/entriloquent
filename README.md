@@ -35,6 +35,8 @@ And use it anywhere in your PHP code like this:
 ```php
 <?php
 
+use App\Models\Product;
+
 //returns product entry - will ONLY search in products collection:
 
 $product = Product::find($id);
@@ -50,8 +52,10 @@ Let's also assume your `products` collection has a field called `price`. You can
 ```php
 <?php
 
+use App\Models\Product;
+
 //returns collection of product entries:
 
-$product = Product::where('price', '>', 100)->get();
+$product = Product::where('price', '>=', 100)->get();
 
 ```
