@@ -1,0 +1,38 @@
+{
+    "name": "bastihilger/entriloquent",
+    "autoload": {
+        "psr-4": {
+            "Bastihilger\\Entriloquent\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bastihilger\\Entriloquent\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "statamic/cms": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "pixelfear/composer-dist-plugin": true,
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "Entriloquent",
+            "description": "Entriloquent addon"
+        },
+        "laravel": {
+            "providers": [
+                "Bastihilger\\Entriloquent\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
