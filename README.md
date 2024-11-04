@@ -4,14 +4,14 @@
 
 ## Features
 
-By creating a PHP class extending `Bastihilger\Entriloquent` you can use this class like a model and have a convenient place for methods concerning this entries of this collection.
+By creating a PHP class extending `Kraenkvisuell\Entriloquent` you can use this class like a model and have a convenient place for methods concerning this entries of this collection.
 
 ## How to Install
 
 You can install this addon via Composer:
 
 ``` bash
-composer require bastihilger/entriloquent
+composer require kraenkvisuell/entriloquent
 ```
 
 ## How to Use

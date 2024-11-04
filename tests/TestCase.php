@@ -1,8 +1,8 @@
 <?php
 
-namespace Bastihilger\Entriloquent\Tests;
+namespace Kraenkvisuell\Entriloquent\Tests;
 
-use Bastihilger\Entriloquent\ServiceProvider;
+use Kraenkvisuell\Entriloquent\ServiceProvider;
 use Statamic\Testing\AddonTestCase;
 
 abstract class TestCase extends AddonTestCase

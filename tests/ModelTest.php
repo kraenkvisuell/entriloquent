@@ -1,9 +1,9 @@
 <?php
 
-namespace Bastihilger\Entriloquent\Tests;
+namespace Kraenkvisuell\Entriloquent\Tests;
 
-use Bastihilger\Entriloquent\EntriloquentTestCustomCollectionModel;
-use Bastihilger\Entriloquent\EntriloquentTestModel;
+use Kraenkvisuell\Entriloquent\EntriloquentTestCustomCollectionModel;
+use Kraenkvisuell\Entriloquent\EntriloquentTestModel;
 use Statamic\Facades\Collection;
 use Statamic\Facades\Entry;
 

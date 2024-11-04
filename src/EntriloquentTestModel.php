@@ -1,6 +1,6 @@
 <?php
 
-namespace Bastihilger\Entriloquent;
+namespace Kraenkvisuell\Entriloquent;
 
 class EntriloquentTestModel extends Entriloquent
 {

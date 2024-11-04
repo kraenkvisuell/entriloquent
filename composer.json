@@ -1,13 +1,13 @@
 {
-    "name": "bastihilger/entriloquent",
+    "name": "kraenkvisuell/entriloquent",
     "autoload": {
         "psr-4": {
-            "Bastihilger\\Entriloquent\\": "src"
+            "Kraenkvisuell\\Entriloquent\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Bastihilger\\Entriloquent\\Tests\\": "tests"
+            "Kraenkvisuell\\Entriloquent\\Tests\\": "tests"
         }
     },
     "require-dev": {
@@ -27,7 +27,7 @@
         },
         "laravel": {
             "providers": [
-                "Bastihilger\\Entriloquent\\ServiceProvider"
+                "Kraenkvisuell\\Entriloquent\\ServiceProvider"
             ]
         }
     },

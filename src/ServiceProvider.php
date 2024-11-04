@@ -1,6 +1,6 @@
 <?php
 
-namespace Bastihilger\Entriloquent;
+namespace Kraenkvisuell\Entriloquent;
 
 use Statamic\Providers\AddonServiceProvider;
 
