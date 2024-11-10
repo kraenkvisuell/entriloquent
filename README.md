@@ -36,7 +36,7 @@ class Product extends Entriloquent
 
 ```
 
-And use it anywhere in your PHP code like this::
+And use it anywhere in your PHP code like this:
 
 ```php
 <?php
