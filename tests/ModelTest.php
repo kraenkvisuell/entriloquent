@@ -4,6 +4,7 @@ namespace Kraenkvisuell\Entriloquent\Tests;
 
 use Kraenkvisuell\Entriloquent\EntriloquentTestCustomCollectionModel;
 use Kraenkvisuell\Entriloquent\EntriloquentTestModel;
+use Kraenkvisuell\Entriloquent\EntriloquentTestModelWithMethod;
 use Statamic\Facades\Collection;
 use Statamic\Facades\Entry;
 
@@ -40,6 +41,29 @@ class ModelTest extends TestCase
         ]);
 
         $this->assertTrue($testModel->id && $testModel->id === Entry::whereCollection('entriloquent_test_models')->first()->id);
+    }
+
+    public function test_that_it_can_be_updated(): void
+    {
+        $testModel = EntriloquentTestModel::create([
+            'title' => 'Updated Title',
+            'slug' => 'test-slug',
+        ]);
+
+        $testModel = $testModel->update(['title' => 'Updated Title', 'slug' => 'updated-slug']);
+
+        ray($testModel);
+        $this->assertTrue($testModel->title === 'Updated Title' && $testModel->slug === 'updated-slug');
+    }
+
+    public function test_that_custom_method_can_be_called(): void
+    {
+        $testModel = EntriloquentTestModel::create([
+            'title' => 'Test Title',
+            'slug' => 'test-slug',
+        ]);
+
+        $this->assertTrue($testModel->fooBar() === 'Foo Bar');
     }
 
     public function test_that_it_has_correct_slug(): void
@@ -80,7 +104,7 @@ class ModelTest extends TestCase
 
         $foundModel = EntriloquentTestModel::find($testModel->id);
 
-        $this->assertSame($testModel, $foundModel);
+        $this->assertTrue($testModel->id === $foundModel->id);
     }
 
     public function test_that_it_can_be_found_by_slug(): void
@@ -89,9 +113,9 @@ class ModelTest extends TestCase
 
         $testModel = EntriloquentTestModel::create(['slug' => 'test-slug']);
 
-        $foundModel = EntriloquentTestModel::where('slug', 'test-slug')->first();
+        $foundModel = EntriloquentTestModel::firstWhere('slug', 'test-slug');
 
-        $this->assertSame($testModel, $foundModel);
+        $this->assertTrue($testModel->id === $foundModel->id);
     }
 
     public function test_that_it_can_be_found_by_title(): void
@@ -100,9 +124,9 @@ class ModelTest extends TestCase
 
         $testModel = EntriloquentTestModel::create(['title' => 'Test Title', 'slug' => 'test-slug']);
 
-        $foundModel = EntriloquentTestModel::where('title', 'Test Title')->first();
+        $foundModel = EntriloquentTestModel::firstWhere('title', 'Test Title');
 
-        $this->assertSame($testModel, $foundModel);
+        $this->assertTrue($testModel->id === $foundModel->id);
     }
 
     public function test_that_it_can_be_found_by_misc_data(): void
@@ -111,9 +135,9 @@ class ModelTest extends TestCase
 
         $testModel = EntriloquentTestModel::create(['slug' => 'test-slug', 'some_other_data' => 'Some Other Data']);
 
-        $foundModel = EntriloquentTestModel::where('some_other_data', 'Some Other Data')->first();
+        $foundModel = EntriloquentTestModel::firstWhere('some_other_data', 'Some Other Data');
 
-        $this->assertSame($testModel, $foundModel);
+        $this->assertTrue($testModel->id === $foundModel->id);
     }
 
     public function test_that_it_can_be_created_with_custom_collection(): void

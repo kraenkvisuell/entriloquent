@@ -23,9 +23,15 @@ Let's assume you have a Statamic collection called "Products" (having the handle
 
 namespace App\Models;
 
-class Product extends Entriloquent
+use Kraenkvisuell\Entriloquent\Entriloquent;
+
+class Voucher extends Entriloquent
 {
-    //
+    // you can add any methods here that make sense, like...
+    public function redeem()
+    {
+        return $this->price * (1 + ($this->vat / 100));
+    }
 }
 
 ```

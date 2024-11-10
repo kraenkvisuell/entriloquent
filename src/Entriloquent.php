@@ -7,7 +7,7 @@ use Statamic\Facades\Entry;
 
 class Entriloquent
 {
-    protected static $collection = '';
+    protected static $collectionName = '';
 
     public static function create(array $data)
     {
@@ -25,33 +25,72 @@ class Entriloquent
 
         $entry->save();
 
-        return $entry;
+        return static::augment($entry);
     }
 
-    public static function where($param, $needle)
+    public static function firstWhere($param, $needle)
     {
-        return Entry::query()->where('collection', static::getCollection())->where($param, $needle);
+        $entry = Entry::query()->where('collection', static::getCollection())->where($param, $needle)->first();
+
+        return $entry ? static::augment($entry) : null;
     }
 
     public static function find($id)
     {
-        return Entry::query()->where('collection', static::getCollection())->where('id', $id)->first();
+        $entry = Entry::query()->where('collection', static::getCollection())->where('id', $id)->first();
+
+        return $entry ? static::augment($entry) : null;
     }
 
-    public static function findOrFail($id)
+    public function delete()
     {
-        return Entry::findOrFail($id);
+        $entry = Entry::find($this->id);
+
+        return $entry ? $entry->delete() : false;
     }
 
-    public static function findByUri($uri, $site)
+    public function update(array $data)
     {
-        return Entry::findByUri($uri, $site);
+        $entry = Entry::find($this->id);
+
+        if (!$entry) {
+            return null;
+        }
+
+        $newData = [];
+
+        foreach ($data as $key => $value) {
+            if ($key === 'slug') {
+                $entry->slug($value);
+            } else {
+                $newData[$key] = $value;
+            }
+        }
+
+        $entry->data($newData);
+
+        $entry->save();
+
+        return $this->find($entry->id);
+    }
+
+    protected static function augment($entry)
+    {
+        $model = new static();
+
+        foreach ($entry->toArray() as $key => $value) {
+            if (!isset($model->{$key})) {
+                $model->{$key} = $value;
+            }
+        }
+
+        return $model;
     }
 
     protected static function getCollection()
     {
-        if (static::$collection) {
-            return static::$collection;
+        if (static::$collectionName) {
+            return static::$collectionName;
         }
 
         return Str::plural(Str::snake(substr(strrchr(static::class, '\\'), 1)));

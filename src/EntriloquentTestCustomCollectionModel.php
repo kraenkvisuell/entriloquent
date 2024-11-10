@@ -4,5 +4,5 @@ namespace Kraenkvisuell\Entriloquent;
 
 class EntriloquentTestCustomCollectionModel extends Entriloquent
 {
-    protected static $collection = 'test_custom_collection';
+    protected static $collectionName = 'test_custom_collection';
 }
