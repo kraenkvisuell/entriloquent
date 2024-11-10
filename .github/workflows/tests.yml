@@ -2,7 +2,8 @@ name: Test Suite
 
 on:
   pull_request:
-
+    branches:
+      - main
 jobs:
   php_tests:
     strategy:
