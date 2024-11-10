@@ -25,10 +25,10 @@ namespace App\Models;
 
 use Kraenkvisuell\Entriloquent\Entriloquent;
 
-class Voucher extends Entriloquent
+class Product extends Entriloquent
 {
     // you can add any methods here that make sense, like...
-    public function redeem()
+    public function getPriceInclVat()
     {
         return $this->price * (1 + ($this->vat / 100));
     }
