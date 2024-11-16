@@ -16,7 +16,7 @@ composer require kraenkvisuell/entriloquent
 
 ## How to Use
 
-Let's assume you have a Statamic collection called "Products" (having the handle `products`). Now you can create a PHP class anywhere, f.e. in your models directory:
+Let's assume you have a Statamic collection called "Products" (having the handle `products`). Now you can create a PHP class anywhere - f.e. in your models directory:
 
 ```php
 <?php
