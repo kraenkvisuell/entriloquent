@@ -1,6 +1,6 @@
 # Entriloquent
 
-> Entriloquent is a Statamic addon that lets you use entries of any collection similar to how you use Laravel models.
+> Entriloquent is a Statamic addon that lets you use entries of any collection similar to how you use Laravel models. It is mostly a "convenience" wrapper around "Entry" and mostly makes sense for usage in your PHP/Laravel backend code.
 
 ## Features
 
@@ -16,7 +16,7 @@ composer require kraenkvisuell/entriloquent
 
 ## How to Use
 
-Let's assume you have a Statamic collection called "Products" (having the handle `products`). Now you can create a PHP class anywhere - f.e. in your models directory:
+Let's assume you have a Statamic collection called "Products" (having the handle `products`). Now you can create a PHP class anywhere – I personally use the models directory because that makes sense to me, but it could be anything, like f.e. a "Services" directory.
 
 ```php
 <?php
@@ -36,7 +36,7 @@ class Product extends Entriloquent
 
 ```
 
-And use it anywhere in your PHP code like this:::
+And use it anywhere in your PHP code like this:
 
 ```php
 <?php
@@ -50,6 +50,10 @@ $product = Product::find($id);
 // also returns product entry, also only searching in products collection:
 
 $product = Product::where('slug', 'awesome-product-1')->first();
+
+// works with any fields on the collection:
+
+$product = Product::where('some_custom_field', 'foo bar baz')->first();
 
 ```
 
@@ -65,3 +69,40 @@ use App\Models\Product;
 $product = Product::where('price', '>=', 100)->get();
 
 ```
+
+## Using a custom class name
+
+By default, it looks for a collection that is the snake case plural version of the class name (`Product` -> `products`, `FooBar` -> `foo_bars`). But you can explicitly define the collection that should be used:
+
+
+
+```php
+<?php
+
+namespace App\Models;
+
+use Kraenkvisuell\Entriloquent\Entriloquent;
+
+class Post extends Entriloquent
+{
+    protected static $collectionName = 'blog';
+}
+
+```
+
+## Updating
+
+It comes with a convenient way to update your entries, like this:
+
+```php
+<?php
+
+use App\Models\Product;
+
+$product = Product::find($id);
+
+$product = $product->update(['title' => 'Updated Title', 'slug' => 'updated-slug']);
+
+```
+
+
