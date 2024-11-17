@@ -52,7 +52,6 @@ class ModelTest extends TestCase
 
         $testModel = $testModel->update(['title' => 'Updated Title', 'slug' => 'updated-slug']);
 
-        ray($testModel);
         $this->assertTrue($testModel->title === 'Updated Title' && $testModel->slug === 'updated-slug');
     }
 
