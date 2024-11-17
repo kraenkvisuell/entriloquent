@@ -42,6 +42,22 @@ class Entriloquent
         return $entry ? static::augment($entry) : null;
     }
 
+    public static function all()
+    {
+        $entries = Entry::query()->where('collection', static::getCollection())->get();
+
+        return $entries->map(fn ($entry) =>  static::augment($entry));
+    }
+
+    public static function where($param1, $param2, $param3 = null)
+    {
+        $query = Entry::query()->where('collection', static::getCollection())->where($param1, $param2, $param3);
+
+        $entries = $query->get();
+
+        return $entries->map(fn ($entry) =>  static::augment($entry));
+    }
+
     public function delete()
     {
         $entry = Entry::find($this->id);

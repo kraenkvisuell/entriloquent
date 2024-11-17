@@ -50,11 +50,14 @@ $product = Product::find($id);
 // also returns product entry, also only searching in products collection:
 
 $product = Product::where('slug', 'awesome-product-1')->first();
+// or
+$product = Product::firstWhere('slug', 'awesome-product-1');
 
 // works with any fields on the collection:
 
 $product = Product::where('some_custom_field', 'foo bar baz')->first();
-
+// or
+$product = Product::firstWhere('some_custom_field', 'foo bar baz');
 ```
 
 Let's also assume your `products` collection has a field called `price`. You can do something like this:
@@ -66,9 +69,12 @@ use App\Models\Product;
 
 //returns collection of product entries:
 
-$product = Product::where('price', '>=', 100)->get();
+$product = Product::where('price', '>=', 100);
 
 ```
+
+> [!IMPORTANT]  
+> Entriloquent returns Laravel Collections - this means you don't need to chain a `->get()` onto the `where()` query, it already returns the filtered collection!
 
 ## Using a custom class name
 

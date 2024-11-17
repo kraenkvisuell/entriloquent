@@ -40,7 +40,83 @@ class ModelTest extends TestCase
             'slug' => 'test-slug',
         ]);
 
-        $this->assertTrue($testModel->id && $testModel->id === Entry::whereCollection('entriloquent_test_models')->first()->id);
+        $this->assertTrue(
+            $testModel->id
+            && $testModel->id === Entry::whereCollection('entriloquent_test_models')->first()->id
+        );
+    }
+
+    public function test_that_it_can_return_a_collections_of_all_entries(): void
+    {
+        $testModel1 = EntriloquentTestModel::create([
+            'title' => 'Test Title',
+            'slug' => 'test-slug',
+        ]);
+
+        $testModel2 = EntriloquentTestModel::create([
+            'title' => 'Test Title 2',
+            'slug' => 'test-slug-2',
+        ]);
+
+        $collection = EntriloquentTestModel::all();
+
+        $this->assertTrue($collection->count() === 2);
+        $this->assertTrue($collection->first()->id === $testModel1->id);
+        $this->assertTrue($collection->last()->id === $testModel2->id);
+    }
+
+    public function test_that_it_can_return_a_collections_with_2_params(): void
+    {
+        $testModel1 = EntriloquentTestModel::create([
+            'title' => 'Test Title',
+            'slug' => 'test-slug',
+            'foo' => 'bar',
+        ]);
+
+        $testModel2 = EntriloquentTestModel::create([
+            'title' => 'Test Title 2',
+            'slug' => 'test-slug-2',
+            'foo' => 'baz',
+        ]);
+
+        $testModel3 = EntriloquentTestModel::create([
+            'title' => 'Test Title 3',
+            'slug' => 'test-slug-3',
+            'foo' => 'bar',
+        ]);
+
+        $collection = EntriloquentTestModel::where('foo', 'bar');
+
+        $this->assertTrue($collection->count() === 2);
+        $this->assertTrue($collection->first()->id === $testModel1->id);
+        $this->assertTrue($collection->last()->id === $testModel3->id);
+    }
+
+    public function test_that_it_can_return_a_collections_with_3_params(): void
+    {
+        $testModel1 = EntriloquentTestModel::create([
+            'title' => 'Test Title',
+            'slug' => 'test-slug',
+            'price' => 1,
+        ]);
+
+        $testModel2 = EntriloquentTestModel::create([
+            'title' => 'Test Title 2',
+            'slug' => 'test-slug-2',
+            'price' => 3,
+        ]);
+
+        $testModel3 = EntriloquentTestModel::create([
+            'title' => 'Test Title 3',
+            'slug' => 'test-slug-3',
+            'price' => 2,
+        ]);
+
+        $collection = EntriloquentTestModel::where('price', '<', 3);
+
+        $this->assertTrue($collection->count() === 2);
+        $this->assertTrue($collection->first()->id === $testModel1->id);
+        $this->assertTrue($collection->last()->id === $testModel3->id);
     }
 
     public function test_that_it_can_be_updated(): void
@@ -106,13 +182,24 @@ class ModelTest extends TestCase
         $this->assertTrue($testModel->id === $foundModel->id);
     }
 
-    public function test_that_it_can_be_found_by_slug(): void
+    public function test_that_it_can_be_found_by_slug_with_firstWhere(): void
     {
         EntriloquentTestModel::create(['slug' => 'first-slug']);
 
         $testModel = EntriloquentTestModel::create(['slug' => 'test-slug']);
 
         $foundModel = EntriloquentTestModel::firstWhere('slug', 'test-slug');
+
+        $this->assertTrue($testModel->id === $foundModel->id);
+    }
+
+    public function test_that_it_can_be_found_by_slug_with_where_and_first(): void
+    {
+        EntriloquentTestModel::create(['slug' => 'first-slug']);
+
+        $testModel = EntriloquentTestModel::create(['slug' => 'test-slug']);
+
+        $foundModel = EntriloquentTestModel::where('slug', 'test-slug')->first();
 
         $this->assertTrue($testModel->id === $foundModel->id);
     }
