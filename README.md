@@ -76,6 +76,49 @@ $products = Product::where('price', '>=', 100);
 > [!IMPORTANT]  
 > Entriloquent returns Laravel Collections - this means you don't need to chain a `->get()` onto the `where()` query, it already returns the filtered collection!
 
+## create()
+
+You can create entries like this:
+
+```php
+<?php
+
+use App\Models\Product;
+
+$product = Product::create([
+    'title' => 'Test Title',
+    'slug' => 'test-slug',
+    'price' => 99.99,
+]);
+```
+
+## all()
+
+You can get all entries like this:
+
+```php
+<?php
+
+use App\Models\Product;
+
+$products = Product::all();
+```
+
+## update()
+
+It comes with a convenient way to update your entries, like this:
+
+```php
+<?php
+
+use App\Models\Product;
+
+$product = Product::find($id);
+
+$product = $product->update(['title' => 'Updated Title', 'slug' => 'updated-slug']);
+
+```
+
 ## Using a custom class name
 
 By default, it looks for a collection that is the snake case plural version of the class name (`Product` -> `products`, `FooBar` -> `foo_bars`). But you can explicitly define the collection that should be used:
@@ -95,20 +138,4 @@ class Post extends Entriloquent
 }
 
 ```
-
-## Updating
-
-It comes with a convenient way to update your entries, like this:
-
-```php
-<?php
-
-use App\Models\Product;
-
-$product = Product::find($id);
-
-$product = $product->update(['title' => 'Updated Title', 'slug' => 'updated-slug']);
-
-```
-
 
