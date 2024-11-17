@@ -69,7 +69,7 @@ use App\Models\Product;
 
 //returns collection of product entries:
 
-$product = Product::where('price', '>=', 100);
+$products = Product::where('price', '>=', 100);
 
 ```
 
